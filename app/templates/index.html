@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Exam Formatter</title>
+  <style>
+    body { font-family: Calibri, sans-serif; margin: 2rem auto; max-width: 40rem; }
+    h1 { margin-bottom: 1.2rem; }
+    nav a { display: inline-block; margin: 0.4rem 0.8rem 0.4rem 0; padding: 0.55rem 0.9rem; border: 1px solid #333; text-decoration: none; color: #111; }
+    .error { color: #8b0000; white-space: pre-wrap; }
+    .message { white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>EXAM FORMATTER</h1>
+  {% if message %}<p class="message"><strong>{{ message }}</strong></p>{% endif %}
+  {% if error %}<p class="error"><strong>{{ error }}</strong></p>{% endif %}
+  <nav>
+    <a href="{{ url_for('format_form') }}">Format Exam</a>
+    <a href="{{ url_for('add_reference_form') }}">Add Reference</a>
+    <a href="{{ url_for('view_references') }}">View References</a>
+  </nav>
+</body>
+</html>

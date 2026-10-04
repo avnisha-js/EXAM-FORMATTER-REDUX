@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>View References</title>
+  <style>
+    body { font-family: Calibri, sans-serif; margin: 2rem auto; max-width: 46rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { text-align: left; padding: 0.35rem 0.6rem; border-bottom: 1px solid #ccc; }
+    .error { color: #8b0000; white-space: pre-wrap; }
+    .message { white-space: pre-wrap; }
+    a { color: #111; }
+  </style>
+</head>
+<body>
+  <p><a href="{{ url_for('home') }}">EXAM FORMATTER</a></p>
+  <h1>View References</h1>
+  {% if message %}<p class="message"><strong>{{ message }}</strong></p>{% endif %}
+  {% if error %}<p class="error"><strong>{{ error }}</strong></p>{% endif %}
+  {% if not rows %}
+    <p>No references stored.</p>
+  {% else %}
+    <table>
+      <tr>
+        <th>Grade</th>
+        <th>Subject</th>
+        <th>Reference File</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row.grade }}</td>
+        <td>{{ row.subject }}</td>
+        <td>{{ row.filename }}</td>
+        <td>Certified</td>
+        <td>
+          <form method="post" action="{{ url_for('delete_reference') }}">
+            <input type="hidden" name="grade" value="{{ row.grade }}">
+            <input type="hidden" name="subject" value="{{ row.subject }}">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+</body>
+</html>
